@@ -62,12 +62,12 @@ else
 fi
 
 # Step 4. Generate signature database
-mkdir -p "${OUTPUT_DIR}/hidx"
 SignatureDB="${OUTPUT_DIR}/hidx/hashmark_4_${PROJECT_NAME}.hidx"
-if [ ! -d "$SignatureDB" ]; then
+if [ ! -f "$SignatureDB" ]; then
+    mkdir -p "${OUTPUT_DIR}/hidx"
     echo "Generating ${PROJECT_NAME} signatureDB..."
     cd hmark \
-    && python ./hmark.py -c ../${OUTPUT_DIR}/vulnerable_source_code/ on -n \
+    && python3 ./hmark.py -c ../${OUTPUT_DIR}/vulnerable_source_code/ on -n \
     && cd - \
     && cp ./hmark/hidx/hashmark_4_vulnerable_source_code.hidx "${SignatureDB}" \
     && echo "Signature database generated in '${SignatureDB}' directory."
