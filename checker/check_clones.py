@@ -87,9 +87,9 @@ if __name__ == "__main__":
         vdb_len_hash_dict_list.append(vdb_len_hash_dict)
         vdb_hash_file_dict_list.append(vdb_hash_file_dict)
 
-    collision_set = set()
 
     for vdb_idx, vdb in enumerate(vdb_list):
+        collision_set = set()
         print(f"Target {target} vs VDB {vdb}")
         for func_len in target_len_hash_dict:
             if func_len not in vdb_len_hash_dict_list[vdb_idx]:
