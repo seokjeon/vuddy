@@ -1,6 +1,5 @@
-source_code/
-vulnerable_source_code/
-*_dataset.csv
+output/
+input/
 
 *.pyc
 *test.py
