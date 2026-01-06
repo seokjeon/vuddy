@@ -141,8 +141,8 @@ def removeComment(string):
     c_regex = re.compile(
         r'(?P<comment>//.*?$|[{}]+)|(?P<multilinecomment>/\*.*?\*/)|(?P<noncomment>\'(\\.|[^\\\'])*\'|"(\\.|[^\\"])*"|.[^/\'"]*)',
         re.DOTALL | re.MULTILINE)
-    #return ''.join([c.group('noncomment') for c in c_regex.finditer(string) if c.group('noncomment')])
-    return ''.join([c.group('noncomment') for c in c_regex.finditer(string.decode('latin-1')) if c.group('noncomment')])
+    return ''.join([c.group('noncomment') for c in c_regex.finditer(string) if c.group('noncomment')])
+    #return ''.join([c.group('noncomment') for c in c_regex.finditer(string.decode('latin-1')) if c.group('noncomment')])
 
 # def getBody(originalFunction):
 #   # returns the function's body as a string.
@@ -263,6 +263,7 @@ def parseFile_deep(srcFileName, caller):
 
     try:
         astString = subprocess.check_output(javaCallCommand, stderr=subprocess.STDOUT, shell=True)
+        astString = astString.decode('utf-8')
     except subprocess.CalledProcessError as e:
         print("Parser Error:", e)
         astString = ""
