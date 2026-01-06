@@ -1,3 +1,7 @@
+source_code/
+vulnerable_source_code/
+*_dataset.csv
+
 *.pyc
 *test.py
 tmp_*
