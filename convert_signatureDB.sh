@@ -16,28 +16,8 @@ OUTPUT_DIR="output/${DS_NAME}/${PROJECT_NAME}"
 mkdir -p "${INPUT_DIR}"
 mkdir -p "${OUTPUT_DIR}"
 
-# Step 1. Download RealVul Dataset files
-if [ ! -f "${INPUT_DIR}/${PROJECT_NAME}_dataset.csv" ]; then
-    echo "Downloading ${PROJECT_NAME}_dataset.csv..."
-    wget https://github.com/seokjeon/VP-Bench/releases/download/${DS_NAME}/${PROJECT_NAME}_dataset.csv -P "${INPUT_DIR}"
-else
-    echo "${INPUT_DIR}/${PROJECT_NAME}_dataset.csv already exists, skipping download."
-fi
-
-if [ ! -f "${INPUT_DIR}/${PROJECT_NAME}_source_code.tar.gz" ]; then
-    echo "Downloading ${PROJECT_NAME}_source_code.tar.gz..."
-    wget https://github.com/seokjeon/VP-Bench/releases/download/${DS_NAME}/${PROJECT_NAME}_source_code.tar.gz -P "${INPUT_DIR}"
-else
-    echo "${INPUT_DIR}/${PROJECT_NAME}_source_code.tar.gz already exists, skipping download."
-fi
-
-# Step 2. Extract the source code files
-if [ ! -d "${INPUT_DIR}/source_code" ]; then
-    echo "Extracting ${PROJECT_NAME}_source_code.tar.gz..."
-    tar -xvf "${INPUT_DIR}/${PROJECT_NAME}_source_code.tar.gz" -C "${INPUT_DIR}"
-else
-    echo "source_code directory already exists, skipping extraction."
-fi
+# Step 1-2: 다운로드 및 압축 해제는 prepare.sh에서 수행되며,
+# docker-compose.yml에서 볼륨 마운트로 연결됨
 
 # Step 3. Extract vulnerable functions
 if [ ! -d "${OUTPUT_DIR}/vulnerable_source_code" ]; then
