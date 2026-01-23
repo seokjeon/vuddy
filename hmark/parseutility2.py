@@ -141,7 +141,12 @@ def removeComment(string):
     c_regex = re.compile(
         r'(?P<comment>//.*?$|[{}]+)|(?P<multilinecomment>/\*.*?\*/)|(?P<noncomment>\'(\\.|[^\\\'])*\'|"(\\.|[^\\"])*"|.[^/\'"]*)',
         re.DOTALL | re.MULTILINE)
-    return ''.join([c.group('noncomment') for c in c_regex.finditer(string) if c.group('noncomment')])
+    res = None
+    try:
+        return ''.join([c.group('noncomment') for c in c_regex.finditer(string) if c.group('noncomment')])
+    except: 
+        return ''.join([c.group('noncomment') for c in c_regex.finditer(string.decode('latin-1')) if c.group('noncomment')])
+    # return ''.join([c.group('noncomment') for c in c_regex.finditer(string) if c.group('noncomment')])
     #return ''.join([c.group('noncomment') for c in c_regex.finditer(string.decode('latin-1')) if c.group('noncomment')])
 
 # def getBody(originalFunction):
